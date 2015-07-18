@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var Topic = mongoose.model('Topic');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
+var Category = mongoose.model('Category');
 
 module.exports = (function(){
 
@@ -18,6 +19,7 @@ module.exports = (function(){
 			})
 		},
 
+		
 		getbyid: function(req, res){
 			
 
@@ -94,6 +96,7 @@ module.exports = (function(){
 
        			} else {
                		console.log('comment created');
+               		res.json(true);
               		}
             	})
         	})
@@ -122,12 +125,47 @@ module.exports = (function(){
 
        			} else {
                		console.log('post created');
+               		res.json(true);
               		}
             	})
         	})
     	})	
 
-	}
+	},
+
+
+
+		addLike: function(req, res){
+			
+			
+
+			var query = {'_id':req.params.id};
+
+			var newData = {'like': req.body.like };
+
+
+				Post.findOneAndUpdate(query, newData, {upsert:false}, function(err, doc){
+				    if (err) return res.send(500, { error: err });
+				    return res.send("like succesfully added");
+				});
+
+		},
+
+		addDislike: function(req, res){
+			
+			
+
+			var query = {'_id':req.params.id};
+
+			var newData = {'dislike': req.body.dislike };
+
+
+				Post.findOneAndUpdate(query, newData, {upsert:false}, function(err, doc){
+				    if (err) return res.send(500, { error: err });
+				    return res.send("dislike succesfully added");
+				});
+
+		}
 
 
 

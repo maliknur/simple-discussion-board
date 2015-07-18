@@ -11,6 +11,10 @@ module.exports = function(app){
 		topics.show(req, res);
 	})
 
+	app.get('/categories', function(req, res){
+		categories.show(req, res);
+	})
+
 	app.get('/getTopicById/:id', function(req, res){
 		topics.getbyid(req, res);
 	})
@@ -36,11 +40,13 @@ module.exports = function(app){
 		topics.addComment(req, res);
 	})
 
-	app.post('/users/add', function(req, res){
 
-		users.add(req, res);
+	app.post('/post/like/:id', function(req, res){
+		topics.addLike(req, res);
 	})
 
-
+	app.post('/post/dislike/:id', function(req, res){
+		topics.addDislike(req, res);
+	})
 
 }

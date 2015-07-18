@@ -138,3 +138,8 @@ li .comment_lines{
   margin-bottom: 5px;
 
 }
+
+.glyphicon-menu-up:before{
+  color: green;
+}
+

@@ -10,18 +10,6 @@ var bodyParser = require('body-parser');
 
 
 
-// Local storage for our users and their articles
-var users = [];
-var articles = [{
-    id: '1',
-    title: 'Title 1',
-    body: 'Body 1'
-},{
-    id: '2',
-    title: 'Title 2',
-    body: 'Body 2'
-}];
-
 // Passport session setup
 passport.serializeUser(function (user, done) {
     done(null, user.username);

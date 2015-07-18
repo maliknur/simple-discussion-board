@@ -11,7 +11,7 @@
     <div class="well">
     <h4 class="ml_20"><i><b>{{ topic.topic}}</b></i></h4>
     <p class="pull-right"><i ng-bind="topic.created_at |   date:'medium'"></i></p>
-    <p class="ml_20">Description: {{topic.description}}</p>
+    <h5 class="ml_20">Description: {{topic.description}}</h5>
     <p class="ml_20" ng-init="post.count = topic.post.length">( Number of posts: {{topic.post.length}} )</p>
     </div>
 
@@ -33,7 +33,7 @@
           </textarea>
           </div>
           <div class="col-md-1">
-          <button ng-click="addPost()" class="btn btn-primary pull-right">Post</button>
+          <button ng-click="addPost(topic)" class="btn btn-primary pull-right">Post</button>
           </div>
        </div>
       </form>  
@@ -43,23 +43,32 @@
 
 
 
-
+    <!-- print out posts under the topic -->
       
     <div class="posts">
-      <ul ng-repeat="post in topic.post | filter: filter_name | orderBy: 'created_at':true" >
+      <ul ng-repeat="post in topic.post | filter: filter_name | orderBy: '-like'" >
          
        
           <li class="well">
             <span><a href="" ng-bind="post.user_name"></a></span>
-            <h4 ng-bind="post.post"></h4>
-            <p><i ng-bind="topic.created_at |   date:'medium'"></i></p>
+            <h4 ng-bind="post.post">
+            </h4> 
+            <p>
+                <!-- LIKE AND DISLIKES -->
+                <a href="" ng-click="addLike(post)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                </a> {{post.like}} 
+                 |  
+                <a href="" ng-click="addDislike(post)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                </a> {{post.dislike}}
+            <i class="pull-right" ng-bind="topic.created_at |   date:'medium'"></i>
+            </p>
               
               <!-- print out comments -->
              
             <ul ng-repeat = "comment in post.comment">
              <li class="comment_lines">
-                <span><a href="" ng-bind="comment.user_name"></a></span>: 
-                <span ng-bind="comment.comment"></span>
+                 
+                - <span ng-bind="comment.comment"></span> (<span><a href="" ng-bind="comment.user_name"></a></span>) 
                 
              </li>
 
@@ -88,7 +97,7 @@
         </div>
           
         <div class="col-md-2">
-          <input type="submit" ng-click="addComment(newComment)" class="btn btn-default pull-right" style="margin-right: 30px;" value="Comment">
+          <input type="submit" ng-click="addComment(newComment, topic)" class="btn btn-default pull-right" style="margin-right: 30px;" value="Comment">
         </div>
 
         </div>
@@ -109,16 +118,8 @@
         
 </div>
     
-
-
-
-  </div>
-
-  
-	 
-
 </div>
 
-
+</div>
 
 </div>
