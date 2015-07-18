@@ -1,0 +1,124 @@
+<div class="container" ng-controller="TopicController">
+
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+	<div class="row pull-right">
+		<input class="topic_search" type="text" ng-model="filter_name" placeholder="search...">
+		
+	</div>
+
+  <div class="row">
+    <p><b><a href="">{{ topic.user_name}}</a></b>  posted a topic:</p>
+    <div class="well">
+    <h4 class="ml_20"><i><b>{{ topic.topic}}</b></i></h4>
+    <p class="pull-right"><i ng-bind="topic.created_at |   date:'medium'"></i></p>
+    <p class="ml_20">Description: {{topic.description}}</p>
+    <p class="ml_20" ng-init="post.count = topic.post.length">( Number of posts: {{topic.post.length}} )</p>
+    </div>
+
+
+  
+    <div class="row post_form">
+    
+    <h5>Post your answer here: </h5>
+      
+      <!-- add new Post to Topic -->
+      <form>
+       <input type="hidden" ng-model="newPost.topic_id" value="{{topic._id}}" ng-init="newPost.topic_id = topic._id">
+          
+        <input type="hidden"  ng-model="newPost.user_id" value="{{user.user_id}}" ng-init="newPost.user_id = user.user_id">
+       <input type="hidden" ng-model="newPost.user_name" value="{{user.first_name}}" ng-init="newPost.user_name = user.first_name">
+        <div class="row">
+          <div class="col-md-11">
+          <textarea name="" id="" class="form-control" ng-model="newPost.post">
+          </textarea>
+          </div>
+          <div class="col-md-1">
+          <button ng-click="addPost()" class="btn btn-primary pull-right">Post</button>
+          </div>
+       </div>
+      </form>  
+        <br>
+  </div>
+
+
+
+
+
+      
+    <div class="posts">
+      <ul ng-repeat="post in topic.post | filter: filter_name | orderBy: 'created_at':true" >
+         
+       
+          <li class="well">
+            <span><a href="" ng-bind="post.user_name"></a></span>
+            <h4 ng-bind="post.post"></h4>
+            <p><i ng-bind="topic.created_at |   date:'medium'"></i></p>
+              
+              <!-- print out comments -->
+             
+            <ul ng-repeat = "comment in post.comment">
+             <li class="comment_lines">
+                <span><a href="" ng-bind="comment.user_name"></a></span>: 
+                <span ng-bind="comment.comment"></span>
+                
+             </li>
+
+             </ul>
+             <br>
+
+
+
+      <!-- Comment Add form -->
+       
+      <div class="row">
+ 
+      
+      
+        
+
+         <form>
+       <input  class="hidden" type="text" ng-model="newComment.post_id" value="{{post._id}}" ng-init="newComment.post_id = post._id"> 
+        <input class="hidden" type="text"  ng-model="newComment.user_id" value="{{user.user_id}}" ng-init="newComment.user_id = user.user_id" > 
+       <input class="hidden" type="text" ng-model="newComment.user_name" value="{{user.first_name}}" ng-init="newComment.user_name = user.first_name">
+       
+       <div class="row">
+       <div class="col-md-9 col-md-offset-1 input-group-sm">
+          <textarea name="comment"  class="form-control" ng-model="newComment.comment" placeholder="leave a comment...">
+          </textarea>
+        </div>
+          
+        <div class="col-md-2">
+          <input type="submit" ng-click="addComment(newComment)" class="btn btn-default pull-right" style="margin-right: 30px;" value="Comment">
+        </div>
+
+        </div>
+        
+          </form> 
+
+
+</div>
+       
+    
+
+
+
+    </li>
+           
+
+  </ul>
+        
+</div>
+    
+
+
+
+  </div>
+
+  
+	 
+
+</div>
+
+
+
+</div>
