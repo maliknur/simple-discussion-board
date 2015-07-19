@@ -19,7 +19,7 @@ module.exports = (function(){
 			})
 		},
 
-		
+
 		getbyid: function(req, res){
 			
 
@@ -57,13 +57,13 @@ module.exports = (function(){
 
 		add: function(req, res){
 
-			console.log(req.body.username);
+			console.log(req.body);
 
 			
 			var newTopic = Topic({
 			topic: req.body.topic,
 			description: req.body.description,
-			category: req.body.category,
+			category: req.body.category.catname,
 			user_id: req.body.user_id,
 			user_name: req.body.username
 			})

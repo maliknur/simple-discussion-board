@@ -20,9 +20,19 @@ module.exports = function(app){
 	})
 
 
-	app.get('/users', function(req, res){
-		users.show(req, res);
+	app.get('/getUserById/:id', function(req, res){
+		users.showInfo(req, res);
 	})
+
+	app.get('/getUserPost/:id', function(req, res){
+		users.showPost(req, res);
+	})
+
+	app.get('/getUserComment/:id', function(req, res){
+		users.showComment(req, res);
+	})
+
+
 
 	app.get('categories', function(req, res){
 		categories.show(req, res);

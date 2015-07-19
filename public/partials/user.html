@@ -1,0 +1,50 @@
+<div class="container" ng-controller="UserCtrl">
+	
+	<h2>Statisctics on {{userinfo[0].user_name}}</h2>
+	<br>
+
+	<div class="row well">
+	<div class="col-md-4">
+	<h4>Total contributed topics: {{userinfo.length}} </h4>
+	<hr>
+		<h4>Latest posted topics:</h4>
+		<ul>
+			<li ng-repeat="userDetail in userinfo | limitTo: 5" >
+				<a href="">{{userDetail.topic}}</a>
+			</li>
+			<p><a class="ml_5" href="">more...</a></p>
+		</ul>
+
+	</div>
+
+	<div class="col-md-4">
+	<h4>Total contributed posts: {{user_post.length}} </h4>
+	<hr>
+		<h4>Latest posts:</h4>
+		<ul>
+		<li ng-repeat="userPost in user_post | limitTo: 5" >
+			<span class="oneline"> {{userPost.post}} </span>
+			</li>
+		
+		<p class="ml_5"><a  href="">more...</a></p>
+		</ul>
+		
+	</div>
+
+	<div class="col-md-4">
+	<h4>Total contributed comment: {{user_comment.length}} </h4>
+	<hr>
+		<h4>Latest comments:</h4>
+		<ul>
+		<li ng-repeat="userComment in user_comment | limitTo: 5" >
+			<span class="oneline">{{userComment.comment}} </span>
+		</li>
+		<p class="ml_5"><a  href="">more...</a></p>
+		</ul>
+	</div>
+
+	</div>
+
+
+
+</div>

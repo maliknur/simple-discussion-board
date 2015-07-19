@@ -133,6 +133,10 @@ div .post_form{
   margin-left: 20px;
 }
 
+.ml_5{
+  margin-left: 5px;
+}
+
 li .comment_lines{
   margin-top: 5px;
   margin-bottom: 5px;
@@ -142,4 +146,9 @@ li .comment_lines{
 .glyphicon-menu-up:before{
   color: green;
 }
+.oneline{
+   overflow:hidden; 
+   text-overflow-multiline:ellipsis; 
+   }
+
 

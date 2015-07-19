@@ -22,7 +22,7 @@
 				<tr ng-repeat="topic in topics | filter: filter_name | orderBy: 'created_at':true" >
 					<td ng-bind="topic.category"></td>
 					<td><a href="#/topics/{{topic._id}}" ng-bind="topic.topic"></a></td>
-					<td><a href="#" ng-bind="topic.user_name"></a></td>
+					<td><a href="#/users/{{topic.user_id}}" ng-bind="topic.user_name"></a></td>
           <td class="text-center" ng-bind="topic.post.length"></td>
           <td ng-bind="topic.created_at |   date:'medium'"></td>
           

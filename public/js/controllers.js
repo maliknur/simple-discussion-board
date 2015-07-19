@@ -11,7 +11,7 @@ angular.module('myApp.controllers', [])
 	var topics = {};
 
 	var topic = {};
-	
+
 	var categories = {};
 
 	factory.getTopics = function(callback){
@@ -124,11 +124,96 @@ angular.module('myApp.controllers', [])
 
 })
 
+	
+	//  USER FACTORY
+	.factory('UserFactory', function($http){
+
+		var factory = {};
+		var userinfo = {};
+		var user_post = {};
+		var user_comment={};
+
+
+		
+		factory.getUserById = function(user_id, callback){
+			$http
+			.get('/getUserById/' + user_id)
+			.success(function(output){
+					
+				userinfo = output;
+				
+			})
+			.finally(function(){
+				callback(userinfo);
+			})
+				
+		}
+
+
+		factory.getUserPost = function(user_id, callback){
+			$http
+			.get('/getUserPost/' + user_id)
+			.success(function(output_post){
+					
+			
+				user_post = output_post;
+			})
+			.finally(function(){
+				callback(user_post);
+			})
+				
+		}
+
+		factory.getUserComment = function(user_id, callback){
+			$http
+			.get('/getUserComment/' + user_id)
+			.success(function(output_comment){
+					
+			
+				user_comment = output_comment;
+			})
+			.finally(function(){
+				callback(user_comment);
+			})
+				
+		}
+
+
+
+		return factory;
+	})
+
+
+
+
 
 // *************** CONTROLLERS **********************
 
-  
-  .controller('HomeCtrl', ['$scope', 'TopicFactory', '$location', '$routeParams',  function($scope, TopicFactory, $location,  $routeParams) {
+  .controller('UserCtrl', ['$scope', 'UserFactory', '$routeParams', function($scope, UserFactory, $routeParams){
+
+  		var user_id = $routeParams.id;
+
+		UserFactory.getUserById(user_id, function(data){
+			$scope.userinfo = data;
+		
+		})	
+
+		UserFactory.getUserPost(user_id, function(data){
+			$scope.user_post= data;
+			
+		})
+
+		UserFactory.getUserComment(user_id, function(data){
+			$scope.user_comment= data;
+			
+		})
+
+  } ])
+
+
+// HOME CONTROLLER
+
+  .controller('HomeCtrl', ['$scope', 'TopicFactory', 'UserFactory', '$location', '$routeParams',  function($scope, TopicFactory, UserFactory, $location, $routeParams) {
 
 
   		// SHOW ALL TOPICS
@@ -144,7 +229,9 @@ angular.module('myApp.controllers', [])
 
 	TopicFactory.getCategories(function(data){
 		$scope.categories = data;
-	})	
+	})
+
+
 
 
 
@@ -170,6 +257,7 @@ angular.module('myApp.controllers', [])
   }])
 
 
+// TOPIC CONTROLLER
 
   .controller('TopicController', ['$scope', '$http', '$routeParams', 'TopicFactory', function($scope, $http, $routeParams, TopicFactory){
 

@@ -14,6 +14,7 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', login: true});
   $routeProvider.when('/topics/:id', {templateUrl: 'partials/showtopic.html'});
+   $routeProvider.when('/users/:id', {templateUrl: 'partials/user.html'});
   $routeProvider.when('/topics', {templateUrl: 'partials/topics.html'});
   $routeProvider.when('/signup', {templateUrl: 'partials/signup.html', public: true});
   $routeProvider.when('/verify-email', {templateUrl: 'partials/verify-email.html', verify_email: true});
