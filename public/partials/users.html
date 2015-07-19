@@ -1,0 +1,14 @@
+<div class="container" ng-controller="UserCtrl">
+		
+		<h2>List of Users on our Discussion Board</h2>
+
+		<div class="row">
+			<ul>
+				<li ng-repeat userman in users>
+					<a href="#/users/{{userman.user_id}}" ng-bind="userman.user_name"></a>
+				</li>
+			</ul>
+		</div>
+
+
+</div>
